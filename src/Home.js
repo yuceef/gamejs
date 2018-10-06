@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class Home extends Component {
   constructor(props) {
     super(props);
+    this.props = props
     this.state = { pourcentage: 0,end: false };
   }
   loading = ()=>{
-    if(this.state.pourcentage<100)
+    if(this.state.pourcentage<100){
+      let add = this.state.pourcentage + parseInt(Math.random()*25) 
       this.setState(state => ({
-        pourcentage: state.pourcentage + 10
+        pourcentage: (add>100)?100:add
       }));
+    }
     else
       this.setState(state => ({
         end: true
       }));
   }
+
   componentDidMount() {  
       this.interval = setInterval(() => this.loading(), 1000);
   }
@@ -27,18 +30,17 @@ class Home extends Component {
 
   render() {
     return (
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        <div>
           <p>
-            Loading <code>GameJs</code> Plz wait ...
+            Loading <code>GameJs</code> Please wait ...
           </p>
-          <div className="progress" style={{width: "25%",height: "30px"}}>
+          <div className="progress" style={{width: "100%",height: "30px"}}>
             <div className="progress-bar progress-bar-striped bg-theme font-weight-bold" role="progressbar" style={{width: this.state.pourcentage + "%",height: "30px"}} aria-valuenow={this.state.pourcentage} aria-valuemin="0" aria-valuemax="100">{this.state.pourcentage + "%"}</div>
           </div>
           {
-            (this.state.end)? <button className="btn btn-info btn-big bg-theme mt-2 col-md-2 font-weight-bold">Start</button>:null
+            (this.state.end)? <button onClick={this.props.handleStart} className="btn btn-info btn-big bg-theme mt-2 col-md-4 font-weight-bold">Start</button>:null
           }
-        </header>
+        </div>
     );
   }
 }

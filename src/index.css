@@ -18,3 +18,14 @@ code {
 .color-theme {
   color: #61dafb !important;
 }
+.table-bordered{
+  height: 500px;
+}
+.table-bordered td, .table-bordered th {
+  border: 5px solid #61dafb;
+  background: rgba(255,255,255,.05);
+  font-size:40px;
+  font-weight: 900;
+  width:20%;
+  cursor: pointer;
+}
